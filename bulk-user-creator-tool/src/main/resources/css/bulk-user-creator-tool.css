@@ -1,0 +1,26 @@
+#container {
+    text-align: center;
+}
+
+#container ul{
+    margin: 0 auto;
+    display: table;
+}
+
+#container ul li{
+    margin: 10px 0 10px 0;
+}
+
+#form{
+    margin-top: 5vh;
+}
+
+#file-input{
+    width: 190px;
+    margin-left: 5px;
+}
+
+#submit-btn{
+    display: block;
+    margin: 3vh auto 0 auto;
+}

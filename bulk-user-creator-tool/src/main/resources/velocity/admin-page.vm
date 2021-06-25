@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Bulk User Creation Tool</title>
+        <meta name="decorator" content="atl.admin" />
+        #requireResource(dso.intern.plugin.bulk-user-creator-tool:bulk-user-creator-tool-resources)
+    </head>
+    <body>
+        <div id="container">
+            <h3>Access a CSV file to bulk create new users into Confluence</h3>
+            <h3>The CSV file shall have the following fields:</h3>
+            <ul>
+                <li>Username</li>
+                <li>FullName</li>
+                <li>Email</li>
+                <li>Password</li>
+                <li>GroupsToBeAddedInto</li>
+            </ul>
+
+            <div style="display: block;"></div>
+
+            <form class="aui" id="form" enctype="multipart/form-data" method="POST" action="${req.contextPath}/plugins/servlet/bulk-user-creator-servlet">
+                <label for="file-input">Upload CSV file:</label>
+                <input class="upfile" type="file" id="file-input" name="file-input" accept=".csv">
+                <button id="submit-btn" type="submit" value="Submit">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
+

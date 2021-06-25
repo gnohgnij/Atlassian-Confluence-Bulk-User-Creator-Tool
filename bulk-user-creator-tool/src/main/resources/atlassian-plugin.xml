@@ -1,0 +1,50 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="bulk-user-creator-tool"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="bulk-user-creator-tool-resources" name="bulk-user-creator-tool Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        
+        <resource type="download" name="bulk-user-creator-tool.css" location="/css/bulk-user-creator-tool.css"/>
+        <resource type="download" name="bulk-user-creator-tool.js" location="/js/bulk-user-creator-tool.js"/>
+        <resource type="download" name="response-page.vm" location="/velocity/response-page.vm"/>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>bulk-user-creator-tool</context>
+    </web-resource>
+
+    <web-section key="bulk-user-creation-section" name="Bulk User Creation Tool Section" location="system.admin" weight="100">
+        <label key="Bulk User Creation Tool" />
+    </web-section>
+
+    <web-item name="bulk-user-creator-action-web-ui" key="bulk-user-creator-action-web-ui" section="system.admin/bulk-user-creation-section" weight="500">
+        <description key="item.bulk-user-creator-action-web-ui.link.desc">Access a CSV file to bulk create new users into Confluence</description>
+        <label key="Bulk User Creation Tool"/>
+        <link linkId="my-link">/plugins/bulk-user-creator/bulk-user-creator.action</link>
+    </web-item>
+
+    <xwork name="bulk-user-creator-action-xwork" key="bulk-user-creator-action-xwork">
+        <description key="item.bulk-user-creator-action-xwork.link.desc">Defines what the Bulk User Creation Tool action does.</description>
+        <package name="bulk-user-creator" extends="default" namespace="/plugins/bulk-user-creator">
+            <default-interceptor-ref name="validatingStack"/>
+            <action name="bulk-user-creator" class="dso.intern.plugin.BulkUserCreatorToolAction">
+                <result name="success" type="velocity">/velocity/admin-page.vm</result>
+            </action>
+        </package>
+    </xwork>
+
+    <servlet key="bulk-user-creator-servlet" class="dso.intern.plugin.BulkUserCreatorToolServlet" name="Bulk User Creation Tool Servlet">
+        <description key="my-servlet-description">#</description>
+        <url-pattern>/bulk-user-creator-servlet</url-pattern>
+    </servlet>
+    
+</atlassian-plugin>
