@@ -1,1 +1,15 @@
 # Atlassian-Confluence-Bulk-User-Creator-Tool
+This is a plugin for Atlassian Confluence Server.
+
+Its purpose is to allow admins to bulk create users from an uploaded CSV file.
+
+**Latest Version: 1.0.3**
+
+# Instructions ⚙️
+1. Navigate to *Manage apps* on your Confluence Instance/Server.
+2. Click on *Upload app*.
+3. Upload the .jar/.obr file (**NOT THE TESTS FILE**).
+4. Click on *Confluence Administration* on the top right corner.
+5. Clic on *Bulk User Creeator Tool*
+
+**Groups must be created before hand**
