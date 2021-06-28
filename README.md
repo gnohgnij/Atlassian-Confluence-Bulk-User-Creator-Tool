@@ -3,6 +3,13 @@ This is a plugin for Atlassian Confluence Server.
 
 Its purpose is to allow admins to bulk create users from an uploaded CSV file.
 
+The CSV file shall include the following fields:
+1. Username
+2. Fullname
+3. Email
+4. Password
+5. GroupsToBeAddedInto
+
 **Latest Version: 1.0.3**
 
 # Instructions ⚙️
