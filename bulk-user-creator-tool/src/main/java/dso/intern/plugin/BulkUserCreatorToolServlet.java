@@ -72,7 +72,7 @@ public class BulkUserCreatorToolServlet extends HttpServlet{
                 if(!item.isFormField()){
                     String content = item.getString();
                     StringReader sReader = new StringReader(content);
-                    Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(sReader);
+                    Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(sReader);
 
                     Hashtable<String, String> errors = new Hashtable<String, String>();
 
@@ -91,7 +91,7 @@ public class BulkUserCreatorToolServlet extends HttpServlet{
                         //check if username already exist
                         if(userAccessor.exists(username)){
                             canCreateUser = false;
-                            errors.put(username, username + " already exists");
+                            errors.put(username, "User " + username + " already exists");
                         }
 
                         //check if group exists

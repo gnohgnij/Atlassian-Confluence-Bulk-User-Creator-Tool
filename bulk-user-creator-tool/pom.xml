@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dso.intern.plugin</groupId>
     <artifactId>bulk-user-creator-tool</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
 
     <organization>
         <name>Chong Jing Hong</name>
@@ -35,7 +35,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-csv</artifactId>
             <version>1.8</version>
-            <scope>provided</scope>
         </dependency>
 
 
@@ -63,14 +62,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.atlassian.sal/sal-api -->
-        <dependency>
-            <groupId>com.atlassian.sal</groupId>
-            <artifactId>sal-api</artifactId>
-            <version>4.5.1</version>
-            <scope>provided</scope>
-        </dependency>
-        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
