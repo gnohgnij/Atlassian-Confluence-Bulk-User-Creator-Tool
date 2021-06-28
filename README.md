@@ -17,6 +17,6 @@ The CSV file shall include the following fields:
 2. Click on *Upload app*.
 3. Upload the .jar/.obr file (**NOT THE TESTS FILE**).
 4. Click on *Confluence Administration* on the top right corner.
-5. Clic on *Bulk User Creator Tool*.
+5. Click on *Bulk User Creator Tool*.
 
 **Groups must be created before hand**
