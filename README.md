@@ -20,3 +20,6 @@ The CSV file shall include the following fields:
 5. Click on *Bulk User Creator Tool*.
 
 **Groups must be created before hand**
+
+# Screenshots 📸
+![Image of menu](https://github.com/gnohgnij/Atlassian-Confluence-Bulk-User-Creator-Tool/blob/main/bulk-user-creator-tool/src/main/resources/images/buc-menu.png)
