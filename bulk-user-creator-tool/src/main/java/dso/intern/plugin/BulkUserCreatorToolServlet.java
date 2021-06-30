@@ -77,6 +77,7 @@ public class BulkUserCreatorToolServlet extends HttpServlet{
                     Hashtable<String, String> errors = new Hashtable<String, String>();
 
                     for(CSVRecord record : records){
+                        int row = 1;
 
                         //get username, fullname, email, password and groupsToBeAddedInto
                         String username = record.get("Username");    //UTF-8 BOM
@@ -87,6 +88,13 @@ public class BulkUserCreatorToolServlet extends HttpServlet{
                         String[] groupArray = groupsToBeAddedInto.split(",");
 
                         boolean canCreateUser = true;
+                        
+                        //check for any empty fields
+                        if(username.isEmpty() || fullname.isEmpty() || email.isEmpty() || password.isEmpty() || groupArray.length == 0){
+                            canCreateUser = false;
+                            errors.put("Row " + row, "Empty fields exist");
+                        }
+
 
                         //check if username already exist
                         if(userAccessor.exists(username)){
@@ -115,6 +123,7 @@ public class BulkUserCreatorToolServlet extends HttpServlet{
                         if(canCreateUser){
                             DefaultUser defaultUser = new DefaultUser(username, fullname, email);
                             ConfluenceUser newUser = userAccessor.createUser(defaultUser, Credential.unencrypted(password));
+                            userAccessor.addMembership(UserAccessor.GROUP_CONFLUENCE_USERS, username);  //add to confluence users group to enable login
                             for(int i=0; i<groupArray.length; i++){
                                 userAccessor.addMembership(groupArray[i], username);
                             }
