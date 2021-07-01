@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dso.intern.plugin</groupId>
     <artifactId>bulk-user-creator-tool</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
 
     <organization>
         <name>Chong Jing Hong</name>
