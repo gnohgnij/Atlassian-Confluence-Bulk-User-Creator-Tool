@@ -10,7 +10,7 @@ The CSV file shall include the following fields:
 4. Password
 5. GroupsToBeAddedInto
 
-**Latest Version: 1.0.4**
+**Latest Version: 1.0.5**
 
 # Instructions ⚙️
 1. Navigate to *Manage apps* on your Confluence Instance/Server.
