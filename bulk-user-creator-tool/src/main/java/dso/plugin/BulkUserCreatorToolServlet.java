@@ -1,4 +1,4 @@
-package dso.intern.plugin;
+package dso.plugin;
 
 import javax.inject.Named;
 
@@ -29,6 +29,7 @@ import com.atlassian.confluence.user.UserAccessor;
 import com.atlassian.user.security.password.Credential;
 import com.atlassian.confluence.user.ConfluenceUser;    
 import com.atlassian.user.Group;
+import com.atlassian.core.exception.InfrastructureException;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -41,9 +42,17 @@ import org.apache.commons.csv.CSVRecord;
 public class BulkUserCreatorToolServlet extends HttpServlet{
 
     private final UserAccessor userAccessor;
+    public static final String UTF8_BOM = "\uFEFF";
 
     public BulkUserCreatorToolServlet(UserAccessor userAccessor){
         this.userAccessor = userAccessor;
+    }
+
+    private static String removeUTF8BOM(String s) {
+        if (s.startsWith(UTF8_BOM)) {
+            s = s.substring(1);
+        }
+        return s;
     }
 
     @Override
@@ -93,47 +102,56 @@ public class BulkUserCreatorToolServlet extends HttpServlet{
                             errors.put("Row " + record.getRecordNumber(), "Contains empty field(s)");
                         }
                         else{
-                            //get username, fullname, email, password and groupsToBeAddedInto
-                            username = record.get("Username");    //UTF-8 BOM
-                            fullname = record.get("Fullname");
-                            email = record.get("Email");
-                            password = record.get("Password");
-                            groupsToBeAddedInto = record.get("GroupsToBeAddedInto");
 
-                            String[] groupArray = groupsToBeAddedInto.split(",");
+                            try{
+                                //get username, fullname, email, password and groupsToBeAddedInto
+                                username = record.get("Username");    //UTF-8 BOM
+                                fullname = record.get("Fullname");
+                                email = record.get("Email");
+                                password = record.get("Password");
+
+                                groupsToBeAddedInto = record.get("GroupsToBeAddedInto");
+
+                                String[] groupArray = groupsToBeAddedInto.split(",");
 
 
-                            //check if username already exist
-                            if(userAccessor.exists(username)){
-                                canCreateUser = false;
-                                errors.put(username, "User " + username + " already exists");
-                            }
+                                //check if username already exist
+                                if(userAccessor.exists(username)){
+                                    canCreateUser = false;
+                                    errors.put(username, "User " + username + " already exists");
+                                }
 
-                            //check if group exists
-                            List<Group> listOfGroups = userAccessor.getGroupsAsList();
-                            String[] listOfGroupNames = new String[listOfGroups.size()];
-                            int j=0;
-                            for(Group g : listOfGroups){
-                                listOfGroupNames[j] = g.getName();
-                                j++;
-                            }
-                            if(listOfGroupNames.length > 0){
-                                for(String s : groupArray){
-                                    boolean contains = Arrays.stream(listOfGroupNames).anyMatch(s::equals);
-                                    if(!contains){
-                                        canCreateUser = false;
-                                        errors.put(username, "Group " + s + " does not exist");
+                                //check if group exists
+                                List<Group> listOfGroups = userAccessor.getGroupsAsList();
+                                String[] listOfGroupNames = new String[listOfGroups.size()];
+                                int j=0;
+                                for(Group g : listOfGroups){
+                                    listOfGroupNames[j] = g.getName();
+                                    j++;
+                                }
+                                if(listOfGroupNames.length > 0){
+                                    for(String s : groupArray){
+                                        boolean contains = Arrays.stream(listOfGroupNames).anyMatch(s::equals);
+                                        if(!contains){
+                                            canCreateUser = false;
+                                            errors.put(username, "Group " + s + " does not exist");
+                                        }
+                                    }
+                                }
+
+                                if(canCreateUser){
+                                    DefaultUser defaultUser = new DefaultUser(username, fullname, email);
+                                    ConfluenceUser newUser = userAccessor.createUser(defaultUser, Credential.unencrypted(password));
+                                    userAccessor.addMembership(UserAccessor.GROUP_CONFLUENCE_USERS, username);  //add to confluence users group to enable login
+                                    for(int i=0; i<groupArray.length; i++){
+                                        userAccessor.addMembership(groupArray[i], username);
                                     }
                                 }
                             }
 
-                            if(canCreateUser){
-                                DefaultUser defaultUser = new DefaultUser(username, fullname, email);
-                                ConfluenceUser newUser = userAccessor.createUser(defaultUser, Credential.unencrypted(password));
-                                userAccessor.addMembership(UserAccessor.GROUP_CONFLUENCE_USERS, username);  //add to confluence users group to enable login
-                                for(int i=0; i<groupArray.length; i++){
-                                    userAccessor.addMembership(groupArray[i], username);
-                                }
+                            catch(InfrastructureException e){
+                                canCreateUser = false;
+                                errors.put("Row " + record.getRecordNumber(), "Contains empty field(s)");
                             }
                         }
                     }

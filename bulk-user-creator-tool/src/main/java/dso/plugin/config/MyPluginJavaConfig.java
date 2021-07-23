@@ -1,7 +1,7 @@
-package dso.intern.plugin.config;
+package dso.plugin.config;
 
-import dso.intern.plugin.api.MyPluginComponent;
-import dso.intern.plugin.impl.MyPluginComponentImpl;
+import dso.plugin.api.MyPluginComponent;
+import dso.plugin.impl.MyPluginComponentImpl;
 import com.atlassian.plugins.osgi.javaconfig.configs.beans.ModuleFactoryBean;
 import com.atlassian.plugins.osgi.javaconfig.configs.beans.PluginAccessorBean;
 import com.atlassian.sal.api.ApplicationProperties;

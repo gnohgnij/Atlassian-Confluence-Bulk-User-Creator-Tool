@@ -1,7 +1,7 @@
-package dso.intern.plugin.impl;
+package dso.plugin.impl;
 
 import com.atlassian.sal.api.ApplicationProperties;
-import dso.intern.plugin.api.MyPluginComponent;
+import dso.plugin.api.MyPluginComponent;
 
 
 public class MyPluginComponentImpl implements MyPluginComponent

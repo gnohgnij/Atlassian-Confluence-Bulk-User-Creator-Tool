@@ -5,12 +5,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>dso.intern.plugin</groupId>
+    <groupId>dso.plugin</groupId>
     <artifactId>bulk-user-creator-tool</artifactId>
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.3.0</version>
 
     <organization>
-        <name>Chong Jing Hong</name>
+        <name>DSO</name>
         <url>https://github.com/gnohgnij/Atlassian-Confluence-Bulk-User-Creator-Tool</url>
     </organization>
 
@@ -140,7 +140,7 @@
 
                         <!-- Add package to export here -->
                         <!-- <Export-Package>
-                            dso.intern.plugin.api,
+                            dso.plugin.api,
                         </Export-Package> -->
 
                         <!-- Add package import here -->

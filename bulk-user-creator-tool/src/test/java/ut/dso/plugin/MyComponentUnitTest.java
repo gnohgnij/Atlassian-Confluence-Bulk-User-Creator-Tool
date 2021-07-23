@@ -1,8 +1,8 @@
-package ut.dso.intern.plugin;
+package ut.dso.plugin;
 
 import org.junit.Test;
-import dso.intern.plugin.api.MyPluginComponent;
-import dso.intern.plugin.impl.MyPluginComponentImpl;
+import dso.plugin.api.MyPluginComponent;
+import dso.plugin.impl.MyPluginComponentImpl;
 
 import static org.junit.Assert.assertEquals;
 

@@ -36,13 +36,13 @@
         <description key="item.bulk-user-creator-action-xwork.link.desc">Defines what the Bulk User Creation Tool action does.</description>
         <package name="bulk-user-creator" extends="default" namespace="/plugins/bulk-user-creator">
             <default-interceptor-ref name="validatingStack"/>
-            <action name="bulk-user-creator" class="dso.intern.plugin.BulkUserCreatorToolAction">
+            <action name="bulk-user-creator" class="dso.plugin.BulkUserCreatorToolAction">
                 <result name="success" type="velocity">/velocity/admin-page.vm</result>
             </action>
         </package>
     </xwork>
 
-    <servlet key="bulk-user-creator-servlet" class="dso.intern.plugin.BulkUserCreatorToolServlet" name="Bulk User Creation Tool Servlet">
+    <servlet key="bulk-user-creator-servlet" class="dso.plugin.BulkUserCreatorToolServlet" name="Bulk User Creation Tool Servlet">
         <description key="my-servlet-description">#</description>
         <url-pattern>/bulk-user-creator-servlet</url-pattern>
     </servlet>

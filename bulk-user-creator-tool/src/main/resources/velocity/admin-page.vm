@@ -3,7 +3,7 @@
     <head>
         <title>Bulk User Creation Tool</title>
         <meta name="decorator" content="atl.admin" />
-        #requireResource(dso.intern.plugin.bulk-user-creator-tool:bulk-user-creator-tool-resources)
+        #requireResource(dso.plugin.bulk-user-creator-tool:bulk-user-creator-tool-resources)
     </head>
     <body>
         <div id="container">

@@ -1,4 +1,4 @@
-package dso.intern.plugin;
+package dso.plugin;
 
 import com.opensymphony.xwork.Action;
 import com.atlassian.confluence.core.ConfluenceActionSupport;

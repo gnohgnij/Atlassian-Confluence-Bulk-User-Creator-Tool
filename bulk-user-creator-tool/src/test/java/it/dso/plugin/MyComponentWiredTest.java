@@ -1,9 +1,9 @@
-package it.dso.intern.plugin;
+package it.dso.plugin;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.atlassian.plugins.osgi.test.AtlassianPluginsTestRunner;
-import dso.intern.plugin.api.MyPluginComponent;
+import dso.plugin.api.MyPluginComponent;
 import com.atlassian.sal.api.ApplicationProperties;
 
 import static org.junit.Assert.assertEquals;

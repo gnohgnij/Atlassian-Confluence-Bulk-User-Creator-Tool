@@ -1,4 +1,4 @@
-package dso.intern.plugin.api;
+package dso.plugin.api;
 
 public interface MyPluginComponent
 {
