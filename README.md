@@ -10,7 +10,7 @@ The CSV file shall include the following fields:
 
 **Latest Version: 1.3.0**
 
-# Instructions ⚙️
+# Instructions
 1. Navigate to *Manage apps* on your Confluence Instance/Server.
 2. Click on *Upload app*.
 3. Upload the .jar/.obr file
